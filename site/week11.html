@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Week 11 — Lost in Tra(i)nslation</title>
+<!-- Global Dark Mode — must be at the top of <head> -->
+<script>
+(function() {
+  try {
+    const theme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (theme === 'dark' || (!theme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {
+    console.error(e);
+  }
+})();
+</script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./dist/output.css" />
+
+
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <!-- Bar animation -->
+  <style>
+    .bar-line { transform: scaleX(0); transform-origin: center; animation: barGrow 1s ease forwards; }
+    .bar-line.delay { animation-delay: 0.15s; }
+    .bar-link { opacity: 0; transform: translateY(4px); animation: barFade 0.6s ease forwards; animation-delay: 0.35s; }
+    @keyframes barGrow { to { transform: scaleX(1); } }
+    @keyframes barFade { to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+
+<body class="font-body editorial-bg min-h-screen transition-colors duration-500">
+
+<button id="themeToggle" class="fixed top-6 right-6 z-50 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-black/40 backdrop-blur px-4 py-2 text-sm">🌙 Dark</button>
+
+<div id="page-transition"></div>
+
+<!-- HEADER BAR -->
+<header class="max-w-6xl mx-auto px-6 pt-12">
+  <div class="flex items-center gap-6">
+    <span class="bar-line flex-1 h-px bg-wine/60 dark:bg-white/40"></span>
+    <a href="index.html"
+       class="bar-link text-sm uppercase tracking-wide text-wine dark:text-white opacity-70 hover:opacity-100 transition">
+      ← Back to Home
+    </a>
+    <span class="bar-line delay flex-1 h-px bg-wine/20 dark:bg-white/20"></span>
+  </div>
+</header>
+
+<main class="relative min-h-screen flex justify-center px-6 py-36">
+
+  <!-- Left image -->
+  <div class="hidden lg:block absolute left-12 top-1/2 -translate-y-1/2 w-44 h-[500px]">
+    <img src="images/week11.jpg" class="rounded-2xl shadow-xl opacity-90 h-full w-full object-cover"/>
+  </div>
+
+  <!-- Center content -->
+  <div class="max-w-2xl text-center reveal animate-fadeUp">
+    <h1 class="font-display text-5xl md:text-6xl text-wine dark:text-white mb-12">Week 11</h1>
+
+    <div class="mx-auto mb-12 h-px w-24 bg-wine/60 dark:bg-white/40"></div>
+
+    <p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-gray-300 opacity-85">
+      Project completed, styling optimized, errors fixed, and navigation fully tested.
+      All components polished and ready for presentation.
+    </p>
+  </div>
+
+  <!-- Right image -->
+  <div class="hidden lg:block absolute right-12 top-1/2 -translate-y-1/2 w-44 h-[500px]">
+    <img src="images/week11(1).jpg" class="rounded-2xl shadow-xl opacity-90 h-full w-full object-cover"/>
+  </div>
+</main>
+
+<!-- NAVIGATION -->
+<div class="max-w-4xl mx-auto px-6 pb-20 flex justify-between text-2xl">
+  <a href="week10.html" class="text-wine dark:text-white opacity-70 hover:opacity-100 transition transform hover:-translate-x-1">← Prev </a>
+  <a href="week12.html" class="text-wine dark:text-white opacity-70 hover:opacity-100 transition transform hover:translate-x-1">Next →</a>
+</div>
+
+<script src="assets/scroll.js"></script>
+<script>
+
+
+/* HERO BACKGROUND ANIMATION */
+const bg=document.querySelector('.editorial-bg');
+let mx=50,my=50,tx=50,ty=50;
+window.addEventListener('mousemove',e=>{tx=(e.clientX/window.innerWidth)*100; ty=(e.clientY/window.innerHeight)*100;});
+function animate(){mx+=(tx-mx)*0.03; my+=(ty-my)*0.03; bg.style.setProperty('--mx',`${mx}%`); bg.style.setProperty('--my',`${my}%`); requestAnimationFrame(animate);}
+animate();
+</script>
+
+<footer class="site-footer reveal">
+  <p>© 2025 — Lost in Tra(i)nslation<br>Designed & developed by <span>Monaking Limhorng-GDM 1-</span></p>
+</footer>
+<script>
+const toggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+
+// Set initial button text based on current mode
+toggle.textContent = root.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+
+toggle.onclick = () => {
+  root.classList.toggle('dark');
+  localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+  toggle.textContent = root.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+};
+</script>
+
+</body>
+</html>

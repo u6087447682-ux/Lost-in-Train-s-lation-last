@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 07 — Lost in Tra(i)nslation</title>
+<!-- Global Dark Mode — must be at the top of <head> -->
+<script>
+(function() {
+  try {
+    const theme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (theme === 'dark' || (!theme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {
+    console.error(e);
+  }
+})();
+</script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./dist/output.css" />
+  <!-- Global Dark Mode -->
+
+
+
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+    /* Bar animation */
+    .bar-line { transform: scaleX(0); transform-origin: center; animation: barGrow 1s ease forwards; }
+    .bar-line.delay { animation-delay: 0.15s; }
+    .bar-link { opacity: 0; transform: translateY(4px); animation: barFade 0.6s ease forwards; animation-delay: 0.35s; }
+    @keyframes barGrow { to { transform: scaleX(1); } }
+    @keyframes barFade { to { opacity: 1; transform: translateY(0); } }
+
+    /* Overlapping gallery */
+    .week-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 3rem;
+      gap: 1rem;
+    }
+    .week-gallery img {
+      width: 180px;
+      border-radius: 0.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .week-gallery img:hover {
+      transform: scale(1.07) rotate(1deg);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    .week-gallery img:nth-child(1) { transform: rotate(-2deg); margin-top: 1rem; }
+    .week-gallery img:nth-child(2) { transform: rotate(1deg); margin-top: 0; }
+    .week-gallery img:nth-child(3) { transform: rotate(-1deg); margin-top: 1.5rem; }
+    .week-gallery img:nth-child(4) { transform: rotate(2deg); margin-top: 0; }
+    .week-gallery img:nth-child(5) { transform: rotate(-1deg); margin-top: 1rem; }
+    .week-gallery img:nth-child(6) { transform: rotate(1deg); margin-top: 0.5rem; }
+
+    /* Lightbox modal */
+    #imageModal {
+      position: fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index:50;
+    }
+    #imageModal img {
+      max-width:90%; max-height:90%; border-radius:0.5rem;
+      box-shadow:0 12px 32px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+
+<body class="font-body editorial-bg min-h-screen transition-colors duration-500">
+
+<button id="themeToggle" class="fixed top-6 right-6 z-50 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-black/40 backdrop-blur px-4 py-2 text-sm">
+  🌙 Dark
+</button>
+
+<div id="page-transition"></div>
+
+<header class="max-w-6xl mx-auto px-6 pt-12">
+  <div class="flex items-center gap-6">
+    <span class="bar-line block h-px flex-1 bg-wine/60 dark:bg-white/40"></span>
+    <a href="index.html" class="bar-link text-sm uppercase tracking-wide text-wine dark:text-white opacity-70 hover:opacity-100 transition">
+      ← Back to Home
+    </a>
+    <span class="bar-line delay block h-px flex-1 bg-wine/20 dark:bg-white/20"></span>
+  </div>
+</header>
+
+<main class="relative min-h-screen flex justify-center px-6 py-36">
+
+  <!-- LEFT IMAGE -->
+<div class="hidden lg:block absolute left-12 top-1/2 -translate-y-1/2 w-44 h-[1000px]">
+  <img src="images/week7(1).jpg" alt="Week 07 visual left" class="rounded-2xl shadow-xl opacity-90 h-full w-full object-cover"/>
+</div>
+
+  <!-- CENTER TEXT -->
+  <div class="max-w-2xl text-center reveal animate-fadeUp">
+    <h1 class="font-display text-5xl md:text-6xl text-wine dark:text-white mb-12">Week 07</h1>
+    <div class="mx-auto mb-12 h-px w-24 bg-wine/60 dark:bg-white/40"></div>
+    <p class="text-lg md:text-xl leading-relaxed text-gray-800 dark:text-gray-300 opacity-85">
+      UI polishing, file organization, and creative hover effects with overlapping gallery.
+    </p>
+
+    <!-- Overlapping gallery -->
+    <div class="week-gallery">
+      <img src="images/Scherm 1.png.png" alt="Screen 1"/>
+      <img src="images/Scherm 2.png.png" alt="Screen 2"/>
+      <img src="images/Scherm 3.png.png" alt="Screen 3"/>
+      <img src="images/Scherm 4.png.png" alt="Screen 4"/>
+      <img src="images/Scherm 5.png.png" alt="Screen 5"/>
+      <img src="images/Scherm 6.png.png" alt="Screen 6"/>
+    </div>
+  </div>
+
+  <!-- RIGHT IMAGE -->
+<div class="hidden lg:block absolute right-12 top-1/2 -translate-y-1/2 w-44 h-[1000px]">
+  <img src="images/week7(2).jpg" alt="Week 07 visual right" class="rounded-2xl shadow-xl opacity-90 h-full w-full object-cover"/>
+</div>
+</main>
+
+<!-- NAVIGATION -->
+<div class="max-w-4xl mx-auto px-6 pb-20 flex justify-between text-2xl">
+  <a href="week6.html" class="text-wine dark:text-white opacity-70 hover:opacity-100 transition transform hover:-translate-x-1">← Back</a>
+  <a href="week8.html" class="text-wine dark:text-white opacity-70 hover:opacity-100 transition transform hover:translate-x-1">Next →</a>
+</div>
+
+<!-- Lightbox -->
+<div id="imageModal" class="flex">
+  <img src="" alt="Expanded Image"/>
+</div>
+
+<script src="assets/scroll.js"></script>
+<script>
+
+/* HERO BACKGROUND ANIMATION */
+const bg = document.querySelector('.editorial-bg');
+let mx=50,my=50,tx=50,ty=50;
+window.addEventListener('mousemove', e=>{tx=(e.clientX/window.innerWidth)*100; ty=(e.clientY/window.innerHeight)*100;});
+function animate(){mx+=(tx-mx)*0.03; my+=(ty-my)*0.03; bg.style.setProperty('--mx',`${mx}%`); bg.style.setProperty('--my',`${my}%`); requestAnimationFrame(animate);}
+animate();
+
+/* LIGHTBOX */
+const images = document.querySelectorAll('.week-gallery img');
+const modal = document.getElementById('imageModal');
+const modalImg = modal.querySelector('img');
+images.forEach(img=>{img.addEventListener('click', ()=>{modalImg.src = img.src; modal.style.display='flex';});});
+modal.addEventListener('click', ()=>{ modal.style.display='none'; });
+document.addEventListener('keydown', e=>{if(e.key==='Escape') modal.style.display='none';});
+
+/* KEYBOARD NAVIGATION */
+document.addEventListener('keydown', e=>{
+  const current = window.location.pathname.match(/week(\d+)\.html/);
+  if(!current) return;
+  const week = parseInt(current[1],10);
+  if(e.key==='ArrowRight' && week<8) window.location.href=`week${week+1}.html`;
+  if(e.key==='ArrowLeft' && week>1) window.location.href=`week${week-1}.html`;
+});
+</script>
+
+<footer class="site-footer reveal">
+  <p>© 2025 — Lost in Tra(i)nslation<br>Designed & developed by <span>Monaking Limhorng-GDM 1-</span></p>
+  <nav class="footer-links">
+    <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+    <span>•</span>
+    <a href="https://figma.com" target="_blank" rel="noopener">Figma</a>
+  </nav>
+</footer>
+<script>
+const toggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+
+// Set initial button text based on current mode
+toggle.textContent = root.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+
+toggle.onclick = () => {
+  root.classList.toggle('dark');
+  localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+  toggle.textContent = root.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+};
+</script>
+
+</body>
+</html>

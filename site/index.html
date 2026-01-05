@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Lost in Tra(i)nslation</title>
+<!-- Global Dark Mode — must be at the top of <head> -->
+<script>
+(function() {
+  try {
+    const theme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (theme === 'dark' || (!theme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {
+    console.error(e);
+  }
+})();
+</script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <link rel="stylesheet" href="./dist/output.css" />
+
+  <!-- Global Dark Mode -->
+
+
+  <link rel="stylesheet" href="assets/styles.css" />
+  <!-- SAKURA OVERLAY -->
+<div class="sakura-overlay pointer-events-none absolute inset-0 z-5 overflow-hidden">
+  <!-- We'll generate petals via CSS pseudo-elements -->
+</div>
+
+<style>
+  /* Subtle sakura texture overlay */
+.editorial-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('images/sakura.png') center center / cover no-repeat;
+  opacity: 0.08; /* very subtle */
+  pointer-events: none;
+  z-index: 1;
+}
+/* SAKURA PETALS */
+.sakura-overlay {
+  pointer-events: none;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.sakura-petal {
+  position: absolute;
+  top: -50px;
+  width: 20px;
+  height: 20px;
+  background: url('images/petals.png') no-repeat center/contain;
+  opacity: 0.6;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateX(0px) translateY(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateX(15px) translateY(50vh) rotate(15deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(-10px) translateY(100vh) rotate(-15deg);
+    opacity: 0.6;
+  }
+}
+</style>
+
+<script>
+/* Generate multiple petals dynamically */
+const overlay = document.querySelector('.sakura-overlay');
+
+for(let i = 0; i < 25; i++){
+  const petal = document.createElement('div');
+  petal.className = 'sakura-petal';
+  petal.style.left = Math.random() * 100 + 'vw';
+  petal.style.animationDuration = 5 + Math.random() * 5 + 's';
+  petal.style.animationDelay = Math.random() * 10 + 's';
+  petal.style.width = 15 + Math.random() * 15 + 'px';
+  petal.style.height = petal.style.width;
+  overlay.appendChild(petal);
+}
+</script>
+
+</head>
+
+<body class="font-body transition-colors duration-500">
+
+<!-- 🌙 Dark mode -->
+<button id="themeToggle"
+  class="fixed top-6 right-6 z-50 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-black/40 backdrop-blur px-4 py-2 text-sm transition-all duration-300">
+  🌙 Dark
+</button>
+
+<!-- HERO -->
+<main class="relative min-h-screen editorial-bg overflow-hidden">
+  <!-- Sakura Overlay -->
+  <div class="sakura-overlay"></div>
+
+  <section class="relative z-10 max-w-6xl mx-auto px-6 py-28 grid md:grid-cols-2 gap-16 items-center">
+
+    <!-- TEXT -->
+    <div class="reveal animate-fadeUp">
+      <h1 class="font-display text-5xl md:text-6xl text-wine dark:text-white mb-6">
+         Lost in<br>Tra(i)nslation
+      </h1>
+      <p class="text-lg opacity-80 dark:opacity-90 max-w-md leading-relaxed">
+        A minimal editorial case study documenting my progression in UI, UX, and frontend development.
+      </p>
+    </div>
+
+    <!-- WEEKS -->
+    <div class="grid grid-cols-2 gap-6">
+      <!-- Week 01 -->
+      <a href="week1.html" class="week-card reveal animate-fadeUp delay-100 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/week1.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 01</span>
+          <h3 class="font-display text-lg mt-1">Foundation</h3>
+        </div>
+      </a>
+
+      <!-- Week 02 -->
+      <a href="week2.html" class="week-card reveal animate-fadeUp delay-200 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/week2.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 02</span>
+          <h3 class="font-display text-lg mt-1">Layout</h3>
+        </div>
+      </a>
+
+      <!-- Week 03 -->
+      <a href="week3.html" class="week-card reveal animate-fadeUp delay-300 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/week3.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 03</span>
+          <h3 class="font-display text-lg mt-1">Navigation</h3>
+        </div>
+      </a>
+
+      <!-- Week 04 -->
+      <a href="week4.html" class="week-card reveal animate-fadeUp delay-400 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/week4.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 04+</span>
+          <h3 class="font-display text-lg mt-1">Refinement</h3>
+        </div>
+      </a>
+
+      <!-- Week 05 -->
+      <a href="week5.html" class="week-card reveal animate-fadeUp delay-500 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/week5.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 05</span>
+          <h3 class="font-display text-lg mt-1">UI & CSS</h3>
+        </div>
+      </a>
+
+      <!-- Week 06 -->
+      <a href="week6.html" class="week-card reveal animate-fadeUp delay-600 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/week6.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 06</span>
+          <h3 class="font-display text-lg mt-1">JS Interactions</h3>
+        </div>
+      </a>
+
+      <!-- Week 07 -->
+      <a href="week7.html" class="week-card reveal animate-fadeUp delay-700 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/week7.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 07</span>
+          <h3 class="font-display text-lg mt-1">UI Polishing</h3>
+        </div>
+      </a>
+
+      <!-- Week 08 -->
+      <a href="week8.html" class="week-card reveal animate-fadeUp delay-800 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/week8.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 08</span>
+          <h3 class="font-display text-lg mt-1">Completion</h3>
+        </div>
+      </a>
+
+      <a href="week9.html" class="week-card reveal animate-fadeUp delay-800 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/cover9.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 09</span>
+          <h3 class="font-display text-lg mt-1">Completion</h3>
+        </div>
+      </a>
+
+      <a href="week10.html" class="week-card reveal animate-fadeUp delay-800 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/cover10.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 10</span>
+          <h3 class="font-display text-lg mt-1">Completion</h3>
+        </div>
+      </a>
+
+      <a href="week11.html" class="week-card reveal animate-fadeUp delay-800 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/cover11.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 11</span>
+          <h3 class="font-display text-lg mt-1">Completion</h3>
+        </div>
+      </a>
+
+      <a href="week12.html" class="week-card reveal animate-fadeUp delay-800 relative overflow-hidden rounded-lg shadow-lg group h-48 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="images/cover12.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white text-center p-4">
+          <span class="font-display text-sm">Week 12</span>
+          <h3 class="font-display text-lg mt-1">Completion</h3>
+        </div>
+      </a>
+    </div>
+
+    <!-- ✅ GOOGLE DRIVE LINK (ONLY ADDITION) -->
+      <a
+        href="https://drive.google.com/drive/folders/10TDVHUytinXdKjIAYLX8ILheBktsie3W?usp=drive_link"
+        target="_blank"
+        rel="noopener"
+        class="inline-block mt-6 text-sm underline opacity-70 hover:opacity-100 transition dark:text-white"
+      >
+        View project assets (Google Drive)
+      </a>
+      <!-- ✅ END -->
+
+    </div>
+
+  </section>
+</main>
+
+<!-- 🪟 MODAL -->
+<div id="modal"
+  class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50 transition-opacity duration-300">
+
+  <div class="bg-white dark:bg-black rounded-2xl p-8 max-w-md w-full text-center transform scale-95 transition-transform duration-300">
+    <p id="modalWeek" class="text-sm opacity-60 mb-2"></p>
+    <h2 id="modalTitle" class="font-display text-3xl mb-4"></h2>
+    <p id="modalDesc" class="opacity-70 mb-6"></p>
+
+    <div class="flex gap-4 justify-center">
+      <a id="modalLink" class="px-6 py-3 bg-wine text-white rounded-lg transition-all duration-300 hover:bg-red-600">
+        Open Week
+      </a>
+      <button id="closeModal" class="px-6 py-3 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="assets/scroll.js"></script>
+<script>
+
+
+/* 🪟 MODAL LOGIC */
+const modal = document.getElementById('modal');
+const modalWeek = document.getElementById('modalWeek');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalLink = document.getElementById('modalLink');
+const closeModal = document.getElementById('closeModal');
+
+document.querySelectorAll('.week-card').forEach(card => {
+  card.addEventListener('click', e => {
+    e.preventDefault();
+
+    modalWeek.textContent = card.dataset.week;
+    modalTitle.textContent = card.querySelector('h3').textContent;
+    modalDesc.textContent = card.dataset.desc;
+    modalLink.href = card.getAttribute('href');
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => modal.querySelector('div').classList.add('scale-100'), 10);
+  });
+});
+
+closeModal.onclick = () => {
+  modal.querySelector('div').classList.remove('scale-100');
+  setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); }, 200);
+};
+
+modal.addEventListener('click', e => {
+  if (e.target === modal) {
+    closeModal.onclick();
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal.onclick();
+});
+
+/* HERO BACKGROUND ANIMATION */
+const bg = document.querySelector('.editorial-bg');
+let mx = 50, my = 50, tx = 50, ty = 50;
+
+window.addEventListener('mousemove', e => {
+  tx = (e.clientX / window.innerWidth) * 100;
+  ty = (e.clientY / window.innerHeight) * 100;
+});
+
+function animate() {
+  mx += (tx - mx) * 0.03;
+  my += (ty - my) * 0.03;
+  bg.style.setProperty('--mx', `${mx}%`);
+  bg.style.setProperty('--my', `${my}%`);
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+/* PAGE TRANSITIONS */
+const transition = document.getElementById('page-transition');
+document.querySelectorAll('a[href]').forEach(link => {
+  const url = link.getAttribute('href');
+  if (!url || url.startsWith('#') || url.startsWith('http')) return;
+
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    transition.className = url.includes('index') ? 'transition-light transition-active' : 'transition-red transition-active';
+    setTimeout(() => window.location.href = url, 350);
+  });
+});
+
+window.addEventListener('load', () => transition.classList.remove('transition-active'));
+</script>
+
+<div id="page-transition"></div>
+<footer class="site-footer reveal">
+  <p>
+    © 2025 — Lost in Tra(i)nslation<br>
+    Designed & developed by <span>Monaking Limhorng-GDM 1-</span>
+  </p>
+
+  <nav class="footer-links">
+    <a href="https://github.com/MonakingLim/Lost-In-Train-s-lation" target="_blank" rel="noopener">GitHub</a>
+    <span>•</span>
+    <a href="https://www.figma.com/design/VOxkFMfYQ4yGg9NcQ9SRbP/trein-infromatie-app?node-id=0-1&t=yZYaisvbh6j2QdqG-1" target="_blank" rel="noopener">Figma</a>
+  </nav>
+</footer>
+<script>
+const toggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+
+// Set initial button text based on current mode
+toggle.textContent = root.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+
+toggle.onclick = () => {
+  root.classList.toggle('dark');
+  localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+  toggle.textContent = root.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+};
+</script>
+
+</body>
+</html>

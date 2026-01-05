@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = "site"
+
+[dev]
+  command = "npm run build"
+  port = 8888

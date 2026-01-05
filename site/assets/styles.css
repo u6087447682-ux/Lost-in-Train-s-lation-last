@@ -1,0 +1,397 @@
+/* ============================= */
+/*        FONTS                  */
+/* ============================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ============================= */
+/*       GLOBAL RESET            */
+/* ============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fdf6f0;
+  color: #111;
+  scroll-behavior: smooth;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================= */
+/*      EDITORIAL BACKGROUND     */
+/* ============================= */
+.editorial-bg {
+  --mx: 50%;
+  --my: 50%;
+  min-height: 100vh;
+  background:
+    radial-gradient(600px circle at var(--mx) var(--my),
+      rgba(92, 12, 12, 0.35),
+      transparent 60%),
+    linear-gradient(120deg, #fff5f5 0%, #f2c1c1 30%, #9b2c2c 65%, #5c0c0c 100%);
+  transition: background 0.5s ease, transform 0.3s ease;
+}
+
+.editorial-bg:hover {
+  transform: scale(1.003);
+}
+
+.dark .editorial-bg {
+  background:
+    radial-gradient(600px circle at var(--mx) var(--my),
+      rgba(140, 40, 40, 0.45),
+      transparent 60%),
+    linear-gradient(120deg, #0f0b0b 0%, #1a0f0f 35%, #3b1414 70%, #5c0c0c 100%);
+}
+
+/* ============================= */
+/*        TYPOGRAPHY             */
+/* ============================= */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.5px;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+p {
+  font-size: 1rem;
+  color: #222;
+}
+
+.dark p {
+  color: #ddd;
+}
+
+/* ============================= */
+/*       REVEAL ANIMATIONS       */
+/* ============================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.9s ease forwards;
+  animation-delay: 0.15s;
+}
+
+/* ============================= */
+/*      WEEK CARDS               */
+/* ============================= */
+.week-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.35);
+  transition: all 0.35s ease, transform 0.4s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dark .week-card {
+  background: rgba(20, 20, 20, 0.55);
+  border-color: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.week-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 36px rgba(0,0,0,0.12);
+}
+
+.week-card span {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  transition: opacity 0.3s ease;
+}
+
+.week-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.week-card::after {
+  content: "→";
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.3s ease;
+}
+
+.week-card:hover::after {
+  opacity: 0.7;
+  transform: translateX(0);
+}
+
+/* ============================= */
+/*        NAVIGATION ARROWS       */
+/* ============================= */
+.nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #5c0c0c;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
+  border-radius: 9999px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+  background: rgba(255,255,255,0.85);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.dark .nav-arrow {
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+}
+
+/* ============================= */
+/*      PAGE TRANSITIONS         */
+/* ============================= */
+#page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.transition-red {
+  background: linear-gradient(120deg, #5c0c0c, #7a1a1a, #b44a4a);
+}
+
+.transition-light {
+  background: linear-gradient(120deg, #ffffff, #fff1f1, #f2caca);
+}
+
+.transition-active {
+  opacity: 1;
+}
+
+/* ============================= */
+/*           MODAL               */
+/* ============================= */
+#modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  transition: opacity 0.3s ease;
+}
+
+#modal.flex {
+  display: flex;
+  opacity: 1;
+}
+
+#modal > div {
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  max-width: 28rem;
+  width: 90%;
+  text-align: center;
+}
+
+.dark #modal > div {
+  background: #111;
+  color: #fff;
+}
+
+#modal button,
+#modal a {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#modal a {
+  background-color: #5c0c0c;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+}
+
+#modal button {
+  border: 1px solid #ccc;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+}
+
+/* ============================= */
+/*       DARK MODE BUTTON        */
+/* ============================= */
+#themeToggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  background: rgba(255,255,255,0.75);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-radius: 9999px;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+#themeToggle:hover {
+  transform: scale(1.05);
+}
+
+.dark #themeToggle {
+  background: rgba(0,0,0,0.45);
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* ============================= */
+/*       REDUCED MOTION          */
+/* ============================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* ============================= */
+/*     KEYBOARD FOCUS STATES     */
+/* ============================= */
+
+a:focus-visible,
+button:focus-visible {
+  outline: none;
+}
+
+.week-card:focus-visible {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    0 0 0 2px rgba(92, 12, 12, 0.6),
+    0 16px 32px rgba(0,0,0,0.12);
+}
+
+.dark .week-card:focus-visible {
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.4),
+    0 16px 32px rgba(0,0,0,0.6);
+}
+
+/* Subtle focus ring for arrows */
+.nav-arrow:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px currentColor;
+  border-radius: 9999px;
+}
+/* ============================= */
+/*           FOOTER              */
+/* ============================= */
+
+.site-footer {
+  position: relative;
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  opacity: 0.6;
+  color: #111;
+}
+
+.site-footer span {
+  font-weight: 500;
+}
+
+.dark .site-footer {
+  color: #fff;
+  opacity: 0.55;
+}
+
+/* Soft separation line */
+.site-footer::before {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 1px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(92, 12, 12, 0.6),
+    transparent
+  );
+}
+
+.dark .site-footer::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+}
+.site-footer a {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.site-footer a:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+.week-card img {
+  transition: transform 0.3s ease;
+}
+
+.week-card:hover img {
+  transform: scale(1.05);
+}
+
